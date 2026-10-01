@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'ASTRONOMIA TOURBILLON | Haute Horlogerie Masterpiece</title>
+  <meta name="description" content="An intricate expression of mechanical movement, craftsmanship, and haute horlogerie engineering. Experience the exploded skeleton chronograph." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="bg-[#050505] text-white selection:bg-[#c59a68]/30 selection:text-[#fae5c8] antialiased overflow-x-hidden">
+
+  <!-- INITIAL PRELOADER -->
+  <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050505] transition-opacity duration-700">
+    <div class="relative flex flex-col items-center max-w-sm px-6 text-center">
+      <div class="w-16 h-16 relative mb-6">
+        <div class="absolute inset-0 rounded-full border border-[#c59a68]/20 animate-ping"></div>
+        <div class="absolute inset-0 rounded-full border-t-2 border-[#c59a68] animate-spin"></div>
+        <div class="absolute inset-3 rounded-full border border-[#c59a68]/40 flex items-center justify-center">
+          <div class="w-2 h-2 rounded-full bg-[#c59a68] shadow-[0_0_12px_#c59a68]"></div>
+        </div>
+      </div>
+      <span class="tracking-[0.35em] text-[10px] uppercase text-[#c59a68] font-medium mb-2 font-mono">CALIBRE J-902 ATELIER</span>
+      <h2 class="text-xl font-serif tracking-[0.2em] uppercase text-white/90 mb-4">L'ASTRONOMIA</h2>
+      <div class="w-48 h-[2px] bg-white/10 rounded-full overflow-hidden mb-3">
+        <div id="loader-bar" class="h-full bg-gradient-to-r from-[#8f6d45] via-[#e5c59f] to-[#c59a68] w-0 transition-all duration-150"></div>
+      </div>
+      <div class="flex items-center justify-between w-48 text-[11px] font-mono text-white/40">
+        <span id="loader-status">SYNCHRONIZING GEARS</span>
+        <span id="loader-percent">0%</span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ============================================================ -->
+  <!-- MAIN SCROLL-DRIVEN WATCH PINNED CANVAS SECTION (400vh)        -->
+  <!-- ============================================================ -->
+  <section id="hero-scroll-container" class="relative w-full h-[450vh] bg-[#050505]">
+
+    <!-- STICKY VIEWPORT CONTAINER -->
+    <div id="sticky-viewport">
+
+      <!-- AMBIENT CINEMATIC LIGHTING GLOW BEHIND WATCH -->
+      <div class="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+        <div id="ambient-glow"></div>
+      </div>
+
+      <!-- INSTANT 4K MASTERPIECE HERO WATCH IMAGE -->
+      <img id="watch-poster-fallback" src="/images/watch_hero_4k.jpg" alt="L'Astronomia Tourbillon Skeleton Watch" />
+
+      <!-- MAIN HIGH-PERFORMANCE HTML5 CANVAS -->
+      <canvas id="watch-canvas"></canvas>
+
+      <!-- OVERLAY HUD CONTAINER (Pins overlays cleanly over canvas) -->
+      <div id="hud-overlay-container">
+
+        <!-- FAR LEFT: VERTICAL 01 ── 04 CHRONOMETRIC RULER -->
+        <div id="vertical-gauge">
+          <span class="text-[10px] font-mono tracking-widest text-[#c59a68] mb-3">01</span>
+          <div class="relative w-[1px] h-52 md:h-72 bg-white/15 flex flex-col justify-between items-center py-1">
+            <div id="gauge-reticle" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full border border-[#dfc49e] flex items-center justify-center bg-[#050505] shadow-[0_0_10px_rgba(223,196,158,0.5)] transition-[top] duration-100 ease-out" style="top: 8%;">
+              <div class="w-1.5 h-1.5 rounded-full bg-[#dfc49e]"></div>
+            </div>
+            <div class="w-2 h-[1px] bg-white/20"></div>
+            <div class="w-1.5 h-[1px] bg-white/20"></div>
+            <div class="w-3 h-[1px] bg-[#c59a68]/40"></div>
+            <div class="w-1.5 h-[1px] bg-white/20"></div>
+            <div class="w-2 h-[1px] bg-white/20"></div>
+          </div>
+          <span class="text-[10px] font-mono tracking-widest text-white/40 mt-3">04</span>
+        </div>
+
+        <!-- TOP LUXURY HEADER BAR (Pinned strictly to the top) -->
+        <header id="luxury-top-bar">
+          <!-- Left: Seal Crest + HAUTE HORLOGERIE -->
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-full border border-[#c59a68]/50 flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_0_12px_rgba(197,154,104,0.25)]">
+              <svg class="w-3.5 h-3.5 text-[#dfc49e]" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C11.5 4 10.5 5.5 9 6.5C10.5 7.5 11.5 9 12 11C12.5 9 13.5 7.5 15 6.5C13.5 5.5 12.5 4 12 2Z"/>
+                <path d="M12 13C11.5 15 10.5 16.5 9 17.5C10.5 18.5 11.5 20 12 22C12.5 20 13.5 18.5 15 17.5C13.5 16.5 12.5 15 12 13Z"/>
+                <path d="M2 12C4 11.5 5.5 10.5 6.5 9C7.5 10.5 9 11.5 11 12C9 12.5 7.5 13.5 6.5 15C5.5 13.5 4 12.5 2 12Z"/>
+                <path d="M13 12C15 11.5 16.5 10.5 17.5 9C18.5 10.5 20 11.5 22 12C20 12.5 18.5 13.5 17.5 15C16.5 13.5 15 12.5 13 12Z"/>
+                <circle cx="12" cy="12" r="1.5" fill="#dfc49e"/>
+              </svg>
+            </div>
+            <span class="text-[11px] font-mono tracking-[0.28em] text-[#dfc49e] uppercase font-medium">HAUTE HORLOGERIE</span>
+          </div>
+
+          <!-- Center: Clean Hairline Divider without center text -->
+          <div class="hidden md:flex items-center flex-1 max-w-sm lg:max-w-md mx-8">
+            <div class="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#c59a68]/20 to-transparent"></div>
+          </div>
+
+          <!-- Right: MECHANICAL COLLECTION -->
+          <div class="flex items-center gap-3">
+            <div class="hidden lg:block w-10 h-[1px] bg-[#c59a68]/30"></div>
+            <span class="text-[11px] font-mono tracking-[0.28em] text-white/80 uppercase font-medium">MECHANICAL COLLECTION</span>
+          </div>
+        </header>
+
+        <!-- EDITORIAL TECHNICAL HUD - LEFT CARD (Phases 01 & 03) -->
+        <div id="hud-left-card">
+          <div class="hud-corner hud-corner-tl"></div>
+          <div class="hud-corner hud-corner-tr"></div>
+          <div class="hud-corner hud-corner-bl"></div>
+          <div class="hud-corner hud-corner-br"></div>
+
+          <!-- Technical Eyebrow -->
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-mono tracking-[0.28em] text-[#c59a68] uppercase font-semibold" id="hud-left-eyebrow">MECHANICAL SYSTEM</span>
+            <span class="text-[10px] font-mono text-[#c59a68]/50">//</span>
+            <span id="hud-left-step" class="text-[10px] font-mono tracking-[0.2em] text-[#dfc49e] font-semibold">01</span>
+          </div>
+
+          <!-- Hero Heading on Left -->
+          <h2 id="hud-left-heading" class="text-2xl sm:text-3xl font-sans font-light tracking-tight uppercase leading-[1.08] mb-3">
+            <span class="text-white block font-medium">PRECISION</span>
+            <span class="text-[#c59a68] block font-light tracking-wide">IN MOTION</span>
+          </h2>
+
+          <!-- Body Text on Left -->
+          <p id="hud-left-body" class="text-xs sm:text-sm leading-relaxed text-[#c4b5a5] font-light mb-4 tracking-wide">
+            An intricate mechanical architecture engineered for precision, balance and perpetual motion.
+          </p>
+
+          <!-- Hairline Accent Divider -->
+          <div class="hud-divider"></div>
+
+          <!-- 2-Column Technical Specifications -->
+          <div id="hud-left-specs">
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">MOVEMENT</span>
+              <span class="hud-spec-val">SKELETON AUTOMATIC</span>
+            </div>
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">CASE</span>
+              <span class="hud-spec-val">ROSE GOLD</span>
+            </div>
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">CRYSTAL</span>
+              <span class="hud-spec-val">SAPPHIRE</span>
+            </div>
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">POWER RESERVE</span>
+              <span class="hud-spec-val">72 HOURS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDITORIAL TECHNICAL HUD - RIGHT CARD (Phases 02 & 04) -->
+        <div id="hud-right-card" class="hud-hidden">
+          <div class="hud-corner hud-corner-tl"></div>
+          <div class="hud-corner hud-corner-tr"></div>
+          <div class="hud-corner hud-corner-bl"></div>
+          <div class="hud-corner hud-corner-br"></div>
+
+          <!-- Technical Eyebrow -->
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-mono tracking-[0.28em] text-[#c59a68] uppercase font-semibold" id="hud-right-eyebrow">DECONSTRUCTION</span>
+            <span class="text-[10px] font-mono text-[#c59a68]/50">//</span>
+            <span id="hud-right-step" class="text-[10px] font-mono tracking-[0.2em] text-[#dfc49e] font-semibold">02</span>
+          </div>
+
+          <!-- Hero Heading on Right -->
+          <h2 id="hud-right-heading" class="text-2xl sm:text-3xl font-sans font-light tracking-tight uppercase leading-[1.08] mb-3">
+            <span class="text-white block font-medium">CALIBRE</span>
+            <span class="text-[#c59a68] block font-light tracking-wide">UNVEILED</span>
+          </h2>
+
+          <!-- Body Text on Right -->
+          <p id="hud-right-body" class="text-xs sm:text-sm leading-relaxed text-[#c4b5a5] font-light mb-4 tracking-wide">
+            Exploded skeleton components revealing the architectural gear train and hand-chamfered bridges.
+          </p>
+
+          <!-- Hairline Accent Divider -->
+          <div class="hud-divider"></div>
+
+          <!-- 2-Column Technical Specifications -->
+          <div id="hud-right-specs">
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">GEAR TRAIN</span>
+              <span class="hud-spec-val">28,800 VPH</span>
+            </div>
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">JEWELS</span>
+              <span class="hud-spec-val">38 SYNTHETIC RUBIES</span>
+            </div>
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">FINISH</span>
+              <span class="hud-spec-val">CÔTES DE GENÈVE</span>
+            </div>
+            <div class="hud-specs-row">
+              <span class="hud-spec-label">ESCAPEMENT</span>
+              <span class="hud-spec-val">SILICON BALANCE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM BAR (Pinned strictly to the bottom) -->
+        <footer id="luxury-bottom-bar">
+          <!-- Left: Progress track (01 ── 04) aligned on the left -->
+          <div class="flex items-center gap-3.5 pointer-events-auto">
+            <span class="text-[10px] font-mono text-[#c59a68] font-medium tracking-wider">01</span>
+            <div class="w-24 sm:w-36 h-[1.5px] bg-white/20 relative rounded-full overflow-hidden">
+              <div id="hud-bottom-progress" class="h-full bg-gradient-to-r from-[#c59a68] to-[#dfc49e] w-0 transition-all duration-100 ease-out"></div>
+            </div>
+            <span class="text-[10px] font-mono text-white/40 font-medium tracking-wider">04</span>
+          </div>
+
+          <!-- Center: Completely empty, zero text in center -->
+          <div></div>
+
+          <!-- Right: Harmonic Signal Bars (ıll) -->
+          <div class="flex items-end gap-[3px] text-[#c59a68] opacity-80 pointer-events-auto">
+            <div class="w-[2px] h-2 bg-current"></div>
+            <div class="w-[2px] h-3.5 bg-current"></div>
+            <div class="w-[2px] h-5 bg-current"></div>
+          </div>
+        </footer>
+
+        <!-- Luxury Horological Hallmark Badge (Positioned over bottom-right Gemini star) -->
+        <div id="gemini-mask-box" class="pointer-events-auto select-none transition-all duration-300">
+          <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#0a0807]/90 backdrop-blur-md border border-[#c59a68]/40 shadow-[0_10px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(197,154,104,0.15)] hover:border-[#dfc49e] transition-colors">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#dfc49e]/20 via-[#c59a68]/15 to-transparent border border-[#c59a68]/40 flex items-center justify-center text-[#dfc49e] shadow-[0_0_10px_rgba(197,154,104,0.2)]">
+              <svg class="w-3.5 h-3.5 text-[#dfc49e]" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#dfc49e] animate-pulse"></span>
+                <span class="text-[10px] font-mono tracking-[0.22em] text-[#dfc49e] font-semibold uppercase">POINÇON DE GENÈVE</span>
+              </div>
+              <span class="text-[8.5px] font-mono text-white/50 tracking-wider uppercase block mt-0.5">OFFICIALLY CERTIFIED CHRONOMETER</span>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /#hud-overlay-container -->
+
+    </div> <!-- /#sticky-viewport -->
+
+
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- POST-HERO LUXURY ATELIER SECTIONS                            -->
+  <!-- ============================================================ -->
+
+  <!-- ANCHOR TARGETS FOR SMOOTH SCROLL -->
+  <div id="movement-trigger" class="h-0 w-0"></div>
+
+  <!-- SECTION 1: MOVEMENT TECHNICAL ANATOMY -->
+  <section id="movement" class="relative z-30 py-32 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5 bg-[#050505]">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div>
+        <span class="text-[11px] tracking-[0.35em] text-[#c59a68] font-mono uppercase block mb-3">INTERNAL ARCHITECTURE</span>
+        <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight uppercase">
+          CALIBRE J-902 <span class="font-serif italic font-normal text-gradient-gold">SPECIFICATIONS</span>
+        </h2>
+      </div>
+      <p class="text-sm md:text-base text-white/60 font-light max-w-md">
+        Designed from a clean sheet, the Calibre J-902 incorporates a fully exposed celestial tourbillon carriage operating without upper bridges for unobstructed visibility.
+      </p>
+    </div>
+
+    <!-- 4K Ultra-Macro Tourbillon Feature Banner -->
+    <div class="mb-12 rounded-3xl bg-[#0a0807] border border-white/10 overflow-hidden relative group">
+      <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
+        <div class="p-8 md:p-12 z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#c59a68]/30 bg-[#120f0d]/60 mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#dfc49e] animate-pulse"></span>
+            <span class="text-[10px] tracking-[0.3em] text-[#dfc49e] font-mono uppercase">ULTRA-MACRO 4K HOROLOGY</span>
+          </div>
+          <h3 class="text-2xl md:text-4xl font-light text-white uppercase tracking-tight mb-4">
+            THE 60-SECOND <span class="font-serif italic text-gradient-gold">FLYING TOURBILLON</span>
+          </h3>
+          <p class="text-sm md:text-base text-white/70 font-light leading-relaxed mb-6">
+            Hand-chamfered mirror-polished titanium carriage bridges, hand-blued screws, and synthetic ruby pivot jewels. Operating at 28,800 VPH (4Hz) to neutralize earth's gravitational pull on the hairspring.
+          </p>
+          <div class="flex items-center gap-6 text-xs font-mono text-white/50 border-t border-white/10 pt-4">
+            <div>
+              <span class="block text-[#dfc49e] font-medium text-sm">0.28 g</span>
+              <span>CARRIAGE MASS</span>
+            </div>
+            <div class="w-[1px] h-6 bg-white/10"></div>
+            <div>
+              <span class="block text-white font-medium text-sm">TITANIUM</span>
+              <span>GRADE 5 CAGE</span>
+            </div>
+            <div class="w-[1px] h-6 bg-white/10"></div>
+            <div>
+              <span class="block text-[#dfc49e] font-medium text-sm">POLI NOIR</span>
+              <span>MIRROR FINISH</span>
+            </div>
+          </div>
+        </div>
+        <div class="relative h-[320px] md:h-[420px] overflow-hidden bg-black flex items-center justify-center">
+          <img src="/images/watch_tourbillon_macro.jpg" alt="Calibre J-902 Flying Tourbillon 4K Macro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0a0807] via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#0a0807] lg:via-transparent lg:to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bento Grid of Horological Innovations -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Bento Card 1 -->
+      <div class="bento-card group p-8 rounded-3xl bg-[#0a0807]/90 border border-white/10 hover:border-[#c59a68]/40 transition-all duration-500 relative overflow-hidden">
+        <div class="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#dfc49e] mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p class="text-[10px] font-mono text-[#c59a68] tracking-[0.25em] uppercase mb-1">REGULATING MECHANISM</p>
+        <h3 class="text-xl font-light text-white mb-3">60-Second Flying Tourbillon</h3>
+        <p class="text-sm text-white/60 font-light leading-relaxed">
+          Suspended on ceramic ball bearings without an upper retaining bridge, neutralizing gravitational perturbations with hypnotic 360-degree orbital rotation.
+        </p>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/40">
+          <span>FREQUENCY</span>
+          <span class="text-[#dfc49e]">28,800 VPH (4 HZ)</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 2 -->
+      <div class="bento-card group p-8 rounded-3xl bg-[#0a0807]/90 border border-white/10 hover:border-[#c59a68]/40 transition-all duration-500 relative overflow-hidden">
+        <div class="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#dfc49e] mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <p class="text-[10px] font-mono text-[#c59a68] tracking-[0.25em] uppercase mb-1">ENERGY AUTONOMY</p>
+        <h3 class="text-xl font-light text-white mb-3">Dual-Barrel Power Reserve</h3>
+        <p class="text-sm text-white/60 font-light leading-relaxed">
+          Twin series-coupled mainspring barrels deliver constant torque across 72 continuous hours, maintaining chronometric amplitude until the final hour.
+        </p>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/40">
+          <span>AUTONOMY</span>
+          <span class="text-[#dfc49e]">72 CONSECUTIVE HOURS</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 3 -->
+      <div class="bento-card group p-8 rounded-3xl bg-[#0a0807]/90 border border-white/10 hover:border-[#c59a68]/40 transition-all duration-500 relative overflow-hidden">
+        <div class="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#dfc49e] mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <p class="text-[10px] font-mono text-[#c59a68] tracking-[0.25em] uppercase mb-1">SKELETONIZED CASEWORK</p>
+        <h3 class="text-xl font-light text-white mb-3">18K 5N Rose Gold Architecture</h3>
+        <p class="text-sm text-white/60 font-light leading-relaxed">
+          Monobloc chassis forged in 18k 5N rose gold with hollowed openworked flanks, providing structural rigidity while shaving 34% of redundant mass.
+        </p>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/40">
+          <span>WATER RESISTANCE</span>
+          <span class="text-[#dfc49e]">30 METERS (3 ATM)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CRAFTSMANSHIP & METIERS D'ART -->
+  <section id="craftsmanship" class="relative z-30 py-32 px-6 md:px-16 bg-[#080605] border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-20">
+        <span class="text-[11px] tracking-[0.35em] text-[#c59a68] font-mono uppercase block mb-3">HAUTE HORLOGERIE FINISHING</span>
+        <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight uppercase mb-6">
+          THE ART OF <span class="font-serif italic text-gradient-gold">HAND-FINISHING</span>
+        </h2>
+        <p class="text-base text-white/70 font-light leading-relaxed">
+          Over 240 hours of manual decoration are invested in every individual timepiece. Each bridge is chamfered by master artisans using gentian wood pegs and diamond paste to attain optical mirror reflections.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="p-6 rounded-2xl bg-[#0d0a08]/80 border border-white/5 hover:border-white/15 transition-all">
+          <span class="text-2xl font-serif text-[#dfc49e] mb-4 block">01</span>
+          <h4 class="text-base font-medium text-white mb-2">Poli Noir (Black Polish)</h4>
+          <p class="text-xs text-white/50 leading-relaxed">Flat surfaces polished on zinc plates to achieve reflections that appear pure black or blinding white depending on the lighting angle.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#0d0a08]/80 border border-white/5 hover:border-white/15 transition-all">
+          <span class="text-2xl font-serif text-[#dfc49e] mb-4 block">02</span>
+          <h4 class="text-base font-medium text-white mb-2">Anglage Main (Hand Chamfering)</h4>
+          <p class="text-xs text-white/50 leading-relaxed">Flawless 45-degree hand-filed bevels along every perimeter and interior angle, reflecting light along the perimeter of each skeleton bridge.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#0d0a08]/80 border border-white/5 hover:border-white/15 transition-all">
+          <span class="text-2xl font-serif text-[#dfc49e] mb-4 block">03</span>
+          <h4 class="text-base font-medium text-white mb-2">Perlage (Circular Graining)</h4>
+          <p class="text-xs text-white/50 leading-relaxed">Overlapping circular pearling executed on mainplates and recessed coves to capture ambient luminescence beneath the gear train.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#0d0a08]/80 border border-white/5 hover:border-white/15 transition-all">
+          <span class="text-2xl font-serif text-[#dfc49e] mb-4 block">04</span>
+          <h4 class="text-base font-medium text-white mb-2">Satinage & Micro-Blasting</h4>
+          <p class="text-xs text-white/50 leading-relaxed">Micro-beaded matte textures paired against brushed satin surfaces for visual contrast against polished rose-gold bevels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: ENGINEERING COMPONENT EXPLORER -->
+  <section id="engineering" class="relative z-30 py-32 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5 bg-[#050505]">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-[11px] tracking-[0.35em] text-[#c59a68] font-mono uppercase block mb-3">STRUCTURAL BREAKDOWN</span>
+      <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight uppercase mb-4">
+        PRECISION <span class="font-serif italic text-gradient-gold">DISSECTION</span>
+      </h2>
+      <p class="text-sm md:text-base text-white/60 font-light">
+        Scroll back up or click below to examine the specific layer assemblies revealed during the exploded sequence.
+      </p>
+    </div>
+
+    <!-- 4K Ultra-High-Resolution Exploded Blueprint Showcase -->
+    <div class="mb-14 rounded-3xl bg-[#0a0807] border border-white/10 overflow-hidden relative group">
+      <div class="p-6 md:p-8 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] font-mono text-[#c59a68] uppercase tracking-[0.3em] block mb-1">AXIAL EXPLODED BLUEPRINT • 4K ULTRA-DETAIL</span>
+          <h3 class="text-xl md:text-2xl font-light text-white tracking-wide uppercase">HAUTE HORLOGERIE EXPLODED ARCHITECTURE</h3>
+        </div>
+        <div class="flex items-center gap-3 text-xs font-mono text-white/50">
+          <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#dfc49e]">388 COMPONENTS</span>
+          <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">100% AXIAL ALIGNMENT</span>
+        </div>
+      </div>
+      <div class="relative w-full overflow-hidden bg-black flex items-center justify-center p-4 md:p-8">
+        <img src="/images/watch_exploded_4k.jpg" alt="L'Astronomia Tourbillon 4K Exploded Architecture" class="max-w-full max-h-[650px] w-auto h-auto object-contain rounded-2xl group-hover:scale-[1.02] transition-transform duration-700 shadow-2xl" />
+      </div>
+    </div>
+
+    <!-- Component Layer Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="layer-card p-6 rounded-2xl bg-[#0a0807] border border-white/10 hover:border-[#c59a68]/40 transition-all cursor-pointer" data-jump="0.10">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-mono text-[#c59a68]">LAYER 01</span>
+          <span class="text-[10px] font-mono text-white/40">FRAME 016</span>
+        </div>
+        <h4 class="text-lg font-light text-white mb-2">Sapphire Crystal Dome</h4>
+        <p class="text-xs text-white/60 leading-relaxed">Cambered sapphire crystal with anti-reflective treatment on both inner and outer surfaces, offering distortion-free perspective.</p>
+      </div>
+
+      <div class="layer-card p-6 rounded-2xl bg-[#0a0807] border border-white/10 hover:border-[#c59a68]/40 transition-all cursor-pointer" data-jump="0.30">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-mono text-[#c59a68]">LAYER 02</span>
+          <span class="text-[10px] font-mono text-white/40">FRAME 048</span>
+        </div>
+        <h4 class="text-lg font-light text-white mb-2">Skeleton Dial & Hands</h4>
+        <p class="text-xs text-white/60 leading-relaxed">Sculpted 18k rose gold hands filled with Super-LumiNova for nocturnal legibility atop an open multi-dimensional dial framework.</p>
+      </div>
+
+      <div class="layer-card p-6 rounded-2xl bg-[#0a0807] border border-white/10 hover:border-[#c59a68]/40 transition-all cursor-pointer" data-jump="0.60">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-mono text-[#c59a68]">LAYER 03</span>
+          <span class="text-[10px] font-mono text-white/40">FRAME 096</span>
+        </div>
+        <h4 class="text-lg font-light text-white mb-2">Central Gear Train & Escapement</h4>
+        <p class="text-xs text-white/60 leading-relaxed">High-inertia glucydur balance wheel vibrating at 4 Hertz, governed by a silicon hairspring invulnerable to electromagnetic fields.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: COMPLETE SPECIFICATIONS TABLE -->
+  <section id="specifications" class="relative z-30 py-32 px-6 md:px-16 bg-[#080605] border-t border-white/5">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[11px] tracking-[0.35em] text-[#c59a68] font-mono uppercase block mb-3">TECHNICAL PASSPORT</span>
+        <h2 class="text-3xl md:text-5xl font-light text-white tracking-tight uppercase">
+          CHRONOMETRIC <span class="font-serif italic text-gradient-gold">SPECIFICATIONS</span>
+        </h2>
+      </div>
+
+      <div class="divide-y divide-white/10 text-sm">
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">REFERENCE</span>
+          <span class="text-white font-medium">ASTRO-J902-5N-01</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">MOVEMENT</span>
+          <span class="text-white font-medium">Calibre J-902 In-House Skeleton Tourbillon Manual-Wind</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">DIMENSIONS</span>
+          <span class="text-white font-medium">Diameter 44.0 mm • Thickness 13.8 mm</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">MATERIAL</span>
+          <span class="text-white font-medium">18K (750/1000) 5N Rose Gold • Grade 5 Titanium Bridges</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">FREQUENCY</span>
+          <span class="text-white font-medium">28,800 vibrations per hour (4 Hz)</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">POWER RESERVE</span>
+          <span class="text-white font-medium">72 Hours via Coupled Twin Barrels</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">NUMBER OF JEWELS</span>
+          <span class="text-white font-medium">43 Synthetic Corundum Rubies</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">TOTAL COMPONENTS</span>
+          <span class="text-white font-medium">388 Individually Hand-Finished Parts</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">CRYSTAL & CASEBACK</span>
+          <span class="text-white font-medium">High-Dome Sapphire Crystal with Dual Anti-Reflective Coating</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">STRAP & BUCKLE</span>
+          <span class="text-white font-medium">Hand-Stitched Matte Black Alligator Leather • 18K Rose Gold Deployant</span>
+        </div>
+        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <span class="font-mono text-white/50 text-xs uppercase tracking-wider">LIMITATION</span>
+          <span class="text-[#dfc49e] font-semibold">Strictly Limited to 18 Numbered Examples Worldwide</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: VIP PRIVATE CONCIERGE & COMMISSIONS -->
+  <section class="relative z-30 py-32 px-6 md:px-16 border-t border-white/5 bg-[#050505]">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#c59a68]/30 bg-[#120f0d]/60 mb-6">
+        <span class="text-[10px] tracking-[0.35em] text-[#dfc49e] font-mono uppercase">BY PRIVATE INVITATION</span>
+      </div>
+      <h2 class="text-4xl md:text-6xl font-light text-white tracking-tight uppercase mb-6">
+        ACQUIRE A <span class="font-serif italic text-gradient-gold">COMMISSION</span>
+      </h2>
+      <p class="text-base md:text-lg text-white/70 font-light max-w-xl mx-auto mb-10 leading-relaxed">
+        Due to the intensive hand-crafting required for each Calibre J-902, production is restricted to 18 pieces per calendar year. Reserve your allocation or request a private salon presentation.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button id="vip-inquire-btn" class="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-[#8f6d45] via-[#dfc49e] to-[#c59a68] text-black font-semibold text-xs tracking-[0.25em] uppercase hover:shadow-[0_0_30px_rgba(223,196,158,0.4)] transition-all">
+          REQUEST PRIVATE CONSULTATION
+        </button>
+        <button id="spec-download-btn" class="w-full sm:w-auto px-8 py-4 rounded-full border border-white/20 hover:border-white/50 text-white font-medium text-xs tracking-[0.25em] uppercase bg-black/40 backdrop-blur-md transition-all">
+          DOWNLOAD SPECIFICATION DOSSIER
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUXURY FOOTER -->
+  <footer class="relative z-30 py-16 px-6 md:px-16 border-t border-white/10 bg-[#030303] text-white/50 text-xs font-light">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-2 h-2 rounded-full bg-[#dfc49e]"></div>
+        <span class="tracking-[0.25em] font-medium text-white uppercase text-[11px]">THE CHRONOGRAPH ATELIER</span>
+        <span class="font-mono text-white/30 text-[10px]">GENÈVE</span>
+      </div>
+      <div class="flex items-center gap-8 text-[11px] font-mono text-white/40">
+        <span>SWISS MADE</span>
+        <span>HAUTE HORLOGERIE</span>
+        <span>CALIBRE J-902</span>
+      </div>
+      <div class="text-[11px] text-white/30">
+        &copy; 2026 THE CHRONOGRAPH ATELIER. ALL RIGHTS RESERVED.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- VIP CONCIERGE MODAL                                          -->
+  <!-- ============================================================ -->
+  <div id="vip-modal" class="fixed inset-0 z-[120] flex items-center justify-center bg-black/80 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-400 p-4">
+    <div class="relative w-full max-w-lg bg-[#0d0a08] border border-white/15 p-8 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] max-h-[90vh] overflow-y-auto">
+      <button id="close-modal" class="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 text-white/60 hover:text-white transition-colors" aria-label="Close modal">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="mb-6">
+        <span class="text-[10px] font-mono text-[#c59a68] tracking-[0.3em] uppercase block mb-1">CONFIDENTIAL INQUIRY</span>
+        <h3 class="text-2xl font-light text-white tracking-wide uppercase">PRIVATE CONCIERGE</h3>
+        <p class="text-xs text-white/60 mt-1">Direct communication with our Geneva Atelier director.</p>
+      </div>
+
+      <form id="vip-form" class="space-y-4">
+        <div>
+          <label class="block text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Full Name</label>
+          <input type="text" required placeholder="Lord / Lady / Monsieur / Madame" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:border-[#dfc49e] focus:outline-none transition-colors" />
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Email Address</label>
+          <input type="email" required placeholder="concierge@residence.com" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:border-[#dfc49e] focus:outline-none transition-colors" />
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Preferred Atelier / Salon</label>
+          <select class="w-full px-4 py-2.5 rounded-xl bg-[#120f0d] border border-white/10 text-white text-sm focus:border-[#dfc49e] focus:outline-none transition-colors">
+            <option>Geneva Salon (Rue du Rhône)</option>
+            <option>Paris Private Suite (Place Vendôme)</option>
+            <option>London Mayfair Atelier</option>
+            <option>New York Madison Avenue Salon</option>
+            <option>Tokyo Ginza Atelier</option>
+            <option>Private Residence Consultation</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono text-white/50 uppercase tracking-wider mb-1">Personal Commission Requests</label>
+          <textarea rows="3" placeholder="Custom engraving, bespoke alligator strap colors, or specific serial number requests..." class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:border-[#dfc49e] focus:outline-none transition-colors"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#8f6d45] via-[#dfc49e] to-[#c59a68] text-black font-semibold text-xs tracking-[0.25em] uppercase hover:shadow-[0_0_20px_rgba(223,196,158,0.4)] transition-all">
+          TRANSMIT CONFIDENTIAL DOSSIER
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
